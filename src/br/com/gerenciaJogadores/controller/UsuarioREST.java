@@ -65,7 +65,6 @@ public class UsuarioREST {
 	@Transactional
 	@RequestMapping(method=RequestMethod.POST, value="json/comprar-jogador")
 	public ResponseEntity<Jogador> criarLocal(@RequestBody Jogador jogador){
-		String time = jogador.getTime();
 		try {
 			jogador = js.exibirJogador(jogador);
 		} catch (IOException e) {
@@ -76,7 +75,6 @@ public class UsuarioREST {
 			return new ResponseEntity<Jogador>(jogador, HttpStatus.INTERNAL_SERVER_ERROR);
 		}else{
 			jogador.setMercado(Mercado.escalado);
-			jogador.setTime(time);
 			js.comprarJogador(jogador);
 			return new ResponseEntity<Jogador>(jogador, HttpStatus.OK);
 		}
