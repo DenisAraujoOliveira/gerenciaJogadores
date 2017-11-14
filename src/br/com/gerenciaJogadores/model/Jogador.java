@@ -8,8 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -37,12 +38,12 @@ public class Jogador {
 	@Size(min=1)
 	private int valor;
 	
-	@DecimalMax(value="99") 
-	@DecimalMin(value="1")
+    @Min(1)
+    @Max(99)
 	private int ataque;
 
-	@DecimalMax(value="99") 
-	@DecimalMin(value="1")
+    @Min(1)
+    @Max(99)
 	private int defesa;
 	
 	 
@@ -53,20 +54,20 @@ public class Jogador {
 	@DecimalMin(value="1")
 	private double peso;
 	
-	@DecimalMax(value="99") 
-	@DecimalMin(value="1")
+	@Min(1)
+    @Max(99)
 	private int cond_fisica;
 	
-	@DecimalMax(value="99") 
-	@DecimalMin(value="1")
+	@Min(1)
+    @Max(99)
 	private int forca;
 	
-	@DecimalMax(value="99") 
-	@DecimalMin(value="1")
+	@Min(1)
+    @Max(99)
 	private int drible;
 	
-	@DecimalMax(value="99") 
-	@DecimalMin(value="1")
+	@Min(1)
+    @Max(99)
 	private int desarme;
 	
 	public int getId() {
