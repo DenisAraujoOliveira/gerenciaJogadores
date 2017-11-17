@@ -1,5 +1,6 @@
 package br.com.gerenciaJogadores.model;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,31 +12,33 @@ import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 
 
 
 @Entity
 @Table(name = "Jogador")
-public class Jogador {
+public class Jogador{
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="idJogador")
 	private int id;
 	
-	@NotNull
+	
 	@Size(max=100)
 	private String nome;
 	
-	@NotNull
+	
 	@Size(max=30)
 	private String posicao;
 	
 	@Enumerated(EnumType.STRING)
 	private Mercado mercado;
 	
-	@Size(min=1)
+
+    @Min(1)
 	private int valor;
 	
     @Min(1)
@@ -70,109 +73,163 @@ public class Jogador {
     @Max(99)
 	private int desarme;
 	
+	
+
 	public int getId() {
 		return id;
 	}
 
+
+
 	public void setId(int id) {
 		this.id = id;
-	} 
+	}
+
+
 
 	public String getNome() {
 		return nome;
 	}
 
+
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+
 
 	public String getPosicao() {
 		return posicao;
 	}
 
+
+
 	public void setPosicao(String posicao) {
 		this.posicao = posicao;
 	}
+
+
 
 	public Mercado getMercado() {
 		return mercado;
 	}
 
+
+
 	public void setMercado(Mercado mercado) {
 		this.mercado = mercado;
 	}
+
+
 
 	public int getValor() {
 		return valor;
 	}
 
+
+
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
+
+
 
 	public int getAtaque() {
 		return ataque;
 	}
 
+
+
 	public void setAtaque(int ataque) {
 		this.ataque = ataque;
 	}
+
+
 
 	public int getDefesa() {
 		return defesa;
 	}
 
+
+
 	public void setDefesa(int defesa) {
 		this.defesa = defesa;
 	}
+
+
 
 	public double getAltura() {
 		return altura;
 	}
 
+
+
 	public void setAltura(double altura) {
 		this.altura = altura;
 	}
+
+
 
 	public double getPeso() {
 		return peso;
 	}
 
+
+
 	public void setPeso(double peso) {
 		this.peso = peso;
 	}
+
+
 
 	public int getCond_fisica() {
 		return cond_fisica;
 	}
 
+
+
 	public void setCond_fisica(int cond_fisica) {
 		this.cond_fisica = cond_fisica;
 	}
+
+
 
 	public int getForca() {
 		return forca;
 	}
 
+
+
 	public void setForca(int forca) {
 		this.forca = forca;
 	}
+
+
 
 	public int getDrible() {
 		return drible;
 	}
 
+
+
 	public void setDrible(int drible) {
 		this.drible = drible;
 	}
+
+
 
 	public int getDesarme() {
 		return desarme;
 	}
 
+
+
 	public void setDesarme(int desarme) {
 		this.desarme = desarme;
 	}
+
+
 
 	@Override
 	public String toString() {

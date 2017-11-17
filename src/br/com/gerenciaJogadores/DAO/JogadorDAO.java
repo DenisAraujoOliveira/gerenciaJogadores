@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import br.com.gerenciaJogadores.model.Jogador;
 
 
+
 @Repository
 public class JogadorDAO {
 	@PersistenceContext
@@ -29,8 +30,9 @@ public class JogadorDAO {
 		return manager.createQuery("select j from Jogador j where mercado = 'disponivel'").getResultList();
 	}
 	
-	public void comprarJogador(Jogador jogador){
-		manager.merge(jogador);
+	public Jogador comprarJogador(Jogador jogador){
+		System.out.println(jogador);
+		return manager.merge(jogador);
 	}
 	
 }

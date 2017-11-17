@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.gerenciaJogadores.DAO.JogadorDAO;
 import br.com.gerenciaJogadores.model.Jogador;
+import br.com.gerenciaJogadores.model.Mercado;
 
 
 
@@ -33,8 +34,21 @@ public class JogadorService {
 		
 	}
 	
-	public void comprarJogador(Jogador jogador){
-			jogadorDAO.comprarJogador(jogador);		
+	public Jogador comprarJogador(Jogador jogador){	
+		try {
+			jogador = exibirJogador(jogador);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if(jogador.getMercado() == Mercado.escalado){
+			jogador = null;
+			return jogador;
+		}else{
+			jogador.setMercado(Mercado.escalado);
+			return jogadorDAO.comprarJogador(jogador);
+		}
+		
+				
 	}
 	
 	

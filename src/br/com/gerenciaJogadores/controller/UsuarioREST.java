@@ -6,8 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.gerenciaJogadores.model.Jogador;
-import br.com.gerenciaJogadores.model.Mercado;
+import br.com.gerenciaJogadores.model.Usuario;
 import br.com.gerenciaJogadores.service.JogadorService;
+import br.com.gerenciaJogadores.service.UsuarioService;
 
 
 
@@ -27,10 +27,12 @@ import br.com.gerenciaJogadores.service.JogadorService;
 public class UsuarioREST {
 	
 	private JogadorService js;
+	private UsuarioService us;
 	
 	@Autowired
-	public UsuarioREST(JogadorService js) {
+	public UsuarioREST(JogadorService js, UsuarioService us) {
 		this.js = js;
+		this.us = us;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="json/all-jogadores")
@@ -61,24 +63,29 @@ public class UsuarioREST {
 		return lista;
 	}
 	
-	
+
 	@Transactional
 	@RequestMapping(method=RequestMethod.POST, value="json/comprar-jogador")
-	public ResponseEntity<Jogador> criarLocal(@RequestBody Jogador jogador){
-		try {
-			jogador = js.exibirJogador(jogador);
+	public @ResponseBody Jogador comprarJogador(@RequestBody Jogador jogador){
+			jogador =  js.comprarJogador(jogador);
+			return jogador;
+	}
+	
+	@RequestMapping(method=RequestMethod.POST, value="login")
+	public @ResponseBody Usuario fazerLogin(@RequestBody Usuario usuario) {
+		System.out.println(usuario);
+		Usuario param = null;
+		try{
+			param = us.fazerLogin(usuario);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(jogador.getMercado() == Mercado.escalado){
-			return new ResponseEntity<Jogador>(jogador, HttpStatus.INTERNAL_SERVER_ERROR);
-		}else{
-			jogador.setMercado(Mercado.escalado);
-			js.comprarJogador(jogador);
-			return new ResponseEntity<Jogador>(jogador, HttpStatus.OK);
-		}
+		return param;
 	}
+	
+	
+	
+	
 	
 	
 	
