@@ -21,8 +21,16 @@ public class JogadorDAO {
 		return manager.createQuery("select j from Jogador j").getResultList();
 	}
 	
+	
 	public Jogador exibirJogador(int id){
-		return manager.find(Jogador.class, id);
+		Jogador jogador = new Jogador();
+		jogador.setSucess(false);
+		jogador = manager.find(Jogador.class, id);
+		if(jogador != null){
+			jogador.setSucess(true);
+		}
+		
+		return jogador;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -31,8 +39,7 @@ public class JogadorDAO {
 	}
 	
 	public Jogador comprarJogador(Jogador jogador){
-		System.out.println(jogador);
-		return manager.merge(jogador);
+		return  manager.merge(jogador);
 	}
 	
 }

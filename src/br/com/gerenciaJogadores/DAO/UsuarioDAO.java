@@ -28,7 +28,6 @@ public class UsuarioDAO {
 		if(result != null && result.size() == 1){
 			usuario.setId(result.get(0).getId());
 			usuario.setUsername(result.get(0).getUsername());
-			
 			return usuario;
 		}
 		else{

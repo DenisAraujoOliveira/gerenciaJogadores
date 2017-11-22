@@ -14,6 +14,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Type;
+
 
 
 
@@ -73,7 +75,8 @@ public class Jogador{
     @Max(99)
 	private int desarme;
 	
-	
+	@Type(type="true_false")
+	private boolean sucess;
 
 	public int getId() {
 		return id;
@@ -228,6 +231,16 @@ public class Jogador{
 	public void setDesarme(int desarme) {
 		this.desarme = desarme;
 	}
+	
+	public boolean isSucess() {
+		return sucess;
+	}
+
+
+
+	public void setSucess(boolean sucess) {
+		this.sucess = sucess;
+	}
 
 
 
@@ -236,8 +249,11 @@ public class Jogador{
 		return "Jogador [id=" + id + ", nome=" + nome + ", posicao=" + posicao + ", mercado=" + mercado + ", valor="
 				+ valor + ", ataque=" + ataque + ", defesa=" + defesa + ", altura=" + altura + ", peso=" + peso
 				+ ", cond_fisica=" + cond_fisica + ", forca=" + forca + ", drible=" + drible + ", desarme=" + desarme
-				+ "]";
+				+ ", sucess=" + sucess + "]";
 	}
+
+
+
 
 
 	

@@ -34,22 +34,31 @@ public class JogadorService {
 		
 	}
 	
-	public Jogador comprarJogador(Jogador jogador){	
+
+	public Jogador comprarJogadorPorId(int id) {	
+		Jogador jogador = new Jogador();
+		jogador.setId(id);
 		try {
 			jogador = exibirJogador(jogador);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		if(jogador.getMercado() == Mercado.escalado){
-			jogador = null;
-			return jogador;
+				jogador.setSucess(false);
+				return jogador;
+		}else if(jogador.getMercado() == Mercado.disponivel){
+				jogador.setMercado(Mercado.escalado);
+				jogador.setSucess(true);
+				return jogadorDAO.comprarJogador(jogador);
 		}else{
-			jogador.setMercado(Mercado.escalado);
-			return jogadorDAO.comprarJogador(jogador);
+			jogador.setSucess(false);
 		}
 		
-				
+		return jogador;
+						
 	}
+	
 	
 	
 }

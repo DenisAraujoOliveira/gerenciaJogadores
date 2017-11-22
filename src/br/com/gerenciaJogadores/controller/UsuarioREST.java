@@ -64,12 +64,19 @@ public class UsuarioREST {
 	}
 	
 
+
 	@Transactional
-	@RequestMapping(method=RequestMethod.POST, value="json/comprar-jogador")
-	public @ResponseBody Jogador comprarJogador(@RequestBody Jogador jogador){
-			jogador =  js.comprarJogador(jogador);
-			return jogador;
+	@RequestMapping(method=RequestMethod.POST, value="json/comprar-jogador/{id}")
+	public @ResponseBody Jogador comprarJogadorPorId(@PathVariable("id") Long id){
+		Jogador jogador = null;
+		
+		jogador =  js.comprarJogadorPorId(id.intValue());
+		
+		return jogador;
 	}
+	
+	
+	
 	
 	@RequestMapping(method=RequestMethod.POST, value="login")
 	public @ResponseBody Usuario fazerLogin(@RequestBody Usuario usuario) {
