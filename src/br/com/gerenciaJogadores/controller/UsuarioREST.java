@@ -1,12 +1,11 @@
 package br.com.gerenciaJogadores.controller;
 
-import java.io.IOException;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,21 +27,19 @@ public class UsuarioREST {
 		this.us = us;
 	}
 	/**
-	 * 
-	 * @param usuario
-	 * @return
+	 * @author denilson.oliveira
+	 * @param username e senha
+	 * @return retorna usuario da base de dados
 	 */
 	@RequestMapping(method=RequestMethod.GET, value="login/{username}/{senha}")
 	public @ResponseBody Usuario fazerLogin(@PathVariable(value = "username") String username, @PathVariable(value = "senha") String senha) {
 		Usuario param = new Usuario();
-		Usuario user = new Usuario();
+		Usuario user;
 		param.setUsername(username);
 		param.setSenha(senha);
-		try{
-			user = us.fazerLogin(param);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+		user = us.fazerLogin(param);
+
 		return user;
 	}
 }

@@ -20,8 +20,17 @@ public class UsuarioService {
 		this.usuarioDAOdao = usuarioDAOdao;
 	}
 	
-	public Usuario fazerLogin(Usuario usuario) throws IOException{
-		return usuarioDAOdao.fazerLogin(usuario);
+	public Usuario fazerLogin(Usuario usuario){
+		Usuario user;
+		user = usuarioDAOdao.fazerLogin(usuario);
+		if(user != null){
+			return user;
+		}else{
+			user = new Usuario();
+			return user;
+		}
+		
+		
 	}
 	
 
