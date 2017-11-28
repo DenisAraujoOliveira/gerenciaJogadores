@@ -45,6 +45,7 @@ public class JogadorService {
 		}
 		
 		if(jogador.getMercado() == Mercado.escalado){
+				jogador = new Jogador();
 				jogador.setSucess(false);
 				return jogador;
 		}else if(jogador.getMercado() == Mercado.disponivel){
@@ -52,10 +53,10 @@ public class JogadorService {
 				jogador.setSucess(true);
 				return jogadorDAO.comprarJogador(jogador);
 		}else{
+			jogador = new Jogador();
 			jogador.setSucess(false);
+			return jogador;
 		}
-		
-		return jogador;
 						
 	}
 	

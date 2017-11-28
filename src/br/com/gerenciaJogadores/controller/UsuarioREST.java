@@ -1,23 +1,17 @@
 package br.com.gerenciaJogadores.controller;
 
 import java.io.IOException;
-import java.util.List;
-
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.gerenciaJogadores.model.Jogador;
 import br.com.gerenciaJogadores.model.Usuario;
-import br.com.gerenciaJogadores.service.JogadorService;
+
 import br.com.gerenciaJogadores.service.UsuarioService;
 
 
@@ -26,74 +20,29 @@ import br.com.gerenciaJogadores.service.UsuarioService;
 @RestController
 public class UsuarioREST {
 	
-	private JogadorService js;
+	
 	private UsuarioService us;
 	
 	@Autowired
-	public UsuarioREST(JogadorService js, UsuarioService us) {
-		this.js = js;
+	public UsuarioREST(UsuarioService us) {
 		this.us = us;
 	}
-	
-	@RequestMapping(method=RequestMethod.GET, value="json/all-jogadores")
-	public @ResponseBody List<Jogador> listagem() {
-		List<Jogador> lista = null;
-		lista = js.listarJogadores();
-		return lista;
-	}
-	
-	
-	@RequestMapping(method=RequestMethod.GET, value="json/jogadores/{id}")
-	public @ResponseBody Jogador listaJogadorPorId(@PathVariable("id") Long id) {
-		Jogador jogador = null, param;
+	/**
+	 * 
+	 * @param usuario
+	 * @return
+	 */
+	@RequestMapping(method=RequestMethod.GET, value="login")
+	public @ResponseBody Usuario fazerLogin(@RequestParam(value = "username", required=true) String username, @RequestParam(value = "senha",required=true)String senha) {
+		Usuario param = new Usuario();
+		Usuario user = new Usuario();
+		param.setUsername(username);
+		param.setSenha(senha);
 		try{
-			param = new Jogador();
-			param.setId(id.intValue());
-			jogador = js.exibirJogador(param);
-		} catch(IOException e){
-			e.printStackTrace();
-		}
-		return jogador;
-	}
-	
-	@RequestMapping(method=RequestMethod.GET, value="json/jogadores-disponiveis")
-	public @ResponseBody List<Jogador> listarJogadoresDisponiveis() {
-		List<Jogador> lista = null;
-		lista = js.listarJogadoresDisponiveis();
-		return lista;
-	}
-	
-
-
-	@Transactional
-	@RequestMapping(method=RequestMethod.POST, value="json/comprar-jogador/{id}")
-	public @ResponseBody Jogador comprarJogadorPorId(@PathVariable("id") Long id){
-		Jogador jogador = null;
-		
-		jogador =  js.comprarJogadorPorId(id.intValue());
-		
-		return jogador;
-	}
-	
-	
-	
-	
-	@RequestMapping(method=RequestMethod.POST, value="login")
-	public @ResponseBody Usuario fazerLogin(@RequestBody Usuario usuario) {
-		System.out.println(usuario);
-		Usuario param = null;
-		try{
-			param = us.fazerLogin(usuario);
+			user = us.fazerLogin(param);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return param;
+		return user;
 	}
-	
-	
-	
-	
-	
-	
-	
 }
