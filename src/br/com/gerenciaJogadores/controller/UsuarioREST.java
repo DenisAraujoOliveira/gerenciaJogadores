@@ -32,8 +32,8 @@ public class UsuarioREST {
 	 * @param usuario
 	 * @return
 	 */
-	@RequestMapping(method=RequestMethod.GET, value="login")
-	public @ResponseBody Usuario fazerLogin(@RequestParam(value = "username", required=true) String username, @RequestParam(value = "senha",required=true)String senha) {
+	@RequestMapping(method=RequestMethod.GET, value="login/{username}/{senha}")
+	public @ResponseBody Usuario fazerLogin(@PathVariable(value = "username") String username, @PathVariable(value = "senha") String senha) {
 		Usuario param = new Usuario();
 		Usuario user = new Usuario();
 		param.setUsername(username);
