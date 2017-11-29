@@ -26,7 +26,12 @@ public class UsuarioREST {
 	public UsuarioREST(UsuarioService us) {
 		this.us = us;
 	}
-	/**
+	/**Serviço que efetua validacao de usuario
+	 * se o usuario e senha estiverem certos
+	 * retornam corretamente. caso
+	 * contrario retorna um usuario 
+	 * com atributos vazio
+	 * 
 	 * @author denilson.oliveira
 	 * @param username e senha
 	 * @return retorna usuario da base de dados

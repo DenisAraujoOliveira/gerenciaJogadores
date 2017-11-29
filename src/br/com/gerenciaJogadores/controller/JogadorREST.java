@@ -20,9 +20,6 @@ import br.com.gerenciaJogadores.model.Jogador;
 import br.com.gerenciaJogadores.service.JogadorService;
 
 
-
-
-
 @RestController
 public class JogadorREST {
 	
@@ -34,6 +31,9 @@ public class JogadorREST {
 	}
 	
 	/**
+	 *
+	 * Serviço para disponibilizar lista de todos jogadores 
+	 * sem exceção de status  
 	 * @author denilson.oliveira
 	 * @return List de jogadores. Todos cadastrados na base de dados. 
 	 */
@@ -45,6 +45,13 @@ public class JogadorREST {
 	}
 	
 	/**
+	 * Serviço para buscar dados(nome,posicao,mercado,
+	 * valor,ataque,defesa,altura,peso,cond_fisica,
+	 * forca,drible,desarme e sucess) de 1 
+	 * jogador atraves do id.
+	 * 
+	 * 
+	 * 
 	 * @author denilson.oliveira
 	 * @param id do jogador
 	 * @return Objeto jogador.
@@ -66,6 +73,11 @@ public class JogadorREST {
 	
 	
 	/**
+	 * Serviço para disponibilizar lista
+	 * de jogadores com status disponiveis
+	 * ou seja prontos para
+	 * serem escalados. 
+	 * 
 	 * @author denilson.oliveira
 	 * @return List de jogadores disponiveis na base de dados.
 	 */
@@ -79,17 +91,24 @@ public class JogadorREST {
 
 
 	/**
+	 * Serviço que
+	 * possibilita compra de jogador,
+	 * atualiza status do jogador DISPONIVEL
+	 * para ESCALADO e o atributo sucess como TRUE. 
+	 * Jogadores que ja foram escalados, retornam
+	 * um objeto vazio e com atributo
+	 * sucess como false
+	 * 
 	 * @author denilson.oliveira
 	 * @param id do jogador
 	 * @return Objeto jogador.
 	 */
-	@Transactional
-	@RequestMapping(method=RequestMethod.POST, value="json/comprar-jogador/{id}")
+
+	@RequestMapping(method=RequestMethod.GET, value="json/comprar-jogador/{id}")
 	public @ResponseBody Jogador comprarJogadorPorId(@PathVariable("id") Long id){
 		Jogador jogador = null;
 		jogador =  js.comprarJogadorPorId(id.intValue());
 		
 		return jogador;
-	}
-		
+	}		
 }
